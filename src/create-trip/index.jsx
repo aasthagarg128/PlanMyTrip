@@ -19,13 +19,14 @@ import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '@/service/firebaseConfig';
+import { useNavigate } from 'react-router-dom';
 
 function CreateTrip() {
   const [place, setPlace] = useState(null);
   const [formData, setFormData] = useState({});
   const [openDialog, setOpenDialog] = useState(false);
   const [loading,setLoading]=useState(false);
-
+  const navigate=useNavigate();
 
   const handleInputChange = (name, value) => {
     setFormData({ ...formData, [name]: value });
@@ -78,6 +79,7 @@ const SaveAiTrip=async(TripData)=>{
         id:docId
     });
     setLoading(false);
+    navigate('/view-trip/'+docId)
 }
 
 
